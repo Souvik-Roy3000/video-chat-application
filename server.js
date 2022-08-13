@@ -9,6 +9,10 @@ const cookie = require("cookie-session");
 const passport = require("passport");
 const flash = require("express-flash");
 const mongoose = require("mongoose");
+const Filter = require('bad-words');
+const filter=new Filter();
+let newBadWords=['bal', 'bichi','bara'];
+filter.addWords(...newBadWords);
 const passportAuthenticator = require("./functions/passportStrategy");
 const user = require("./schema/user");
 const peerServer = ExpressPeerServer(server, {
@@ -123,7 +127,9 @@ io.on("connection", (socket) => {
                     .broadcast.emit("user-video-toggle", peerId, type);
             });
             // chat
+           
             socket.on("client-send", (data) => {
+                data=filter.clean(data);
                 socket.to(roomId).broadcast.emit("client-podcast", data, name);
             });
             socket.on("disconnect", async () => {
@@ -148,3 +154,4 @@ io.on("connection", (socket) => {
 server.listen(PORT, () => {
     console.log(`server started on port ${PORT}`);
 });
+

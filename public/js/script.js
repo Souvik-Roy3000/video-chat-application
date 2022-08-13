@@ -13,6 +13,9 @@ function detectMob() {
         return navigator.userAgent.match(toMatchItem);
     });
 }
+
+
+
 const socket = io("/");
 const videoGrid = document.getElementById("video-grid");
 // const name = prompt("Your name");
@@ -159,10 +162,10 @@ function addVideoStream(video, stream, peerId, user) {
     pinBtn.innerHTML = `<ion-icon name="expand-outline"></ion-icon>`;
 
     // create option button
-    // const optionBtn = document.createElement("button");
-    // optionBtn.classList.add("video-element");
-    // optionBtn.classList.add("options-button");
-    // optionBtn.innerHTML = `<ion-icon name="ellipsis-horizontal-outline"></ion-icon>`;
+    const optionBtn = document.createElement("button");
+    optionBtn.classList.add("video-element");
+    optionBtn.classList.add("options-button");
+    optionBtn.innerHTML = `<ion-icon name="ellipsis-horizontal-outline"></ion-icon>`;
 
     // main wrapper
     const videoWrapper = document.createElement("div");
@@ -178,11 +181,13 @@ function addVideoStream(video, stream, peerId, user) {
     const elementsWrapper = document.createElement("div");
     elementsWrapper.classList.add("elements-wrapper");
     elementsWrapper.appendChild(namePara);
-    // elementsWrapper.appendChild(optionBtn);
+   
     elementsWrapper.appendChild(pinBtn);
     elementsWrapper.appendChild(micBtn);
+    
     elementsWrapper.appendChild(audioFXElement);
     elementsWrapper.appendChild(videoOffIndicator);
+    elementsWrapper.appendChild(optionBtn);
 
     video.srcObject = stream;
     video.setAttribute("peer", peerId);
@@ -574,7 +579,7 @@ class SE {
 
         this.audioCTX = new AudioContext();
         this.analyser = this.audioCTX.createAnalyser();
-        console.log(this.audioCTX);
+        // console.log(this.audioCTX);
         const source = this.audioCTX.createMediaStreamSource(this.mediaStream);
         source.connect(this.analyser);
 
@@ -643,7 +648,10 @@ chatForm.addEventListener("submit", (e) => {
 });
 
 socket.on("client-podcast", (data, userName) => {
-    console.log(userName + ": " + data);
+  
+     console.log(userName + ": " + data);
     addMessage("user", userName, data);
     scrollDown(".chat-box");
 });
+
+
