@@ -3,8 +3,11 @@ const route = express.Router();
 const { notAuthorize } = require("../../functions/authFunc");
 const passport = require("passport");
 route.get("/", notAuthorize, (req, res) => {
-  res.render("auth/login.ejs", { tabName: "Login S-Meet" });
+  res.render("auth/login.ejs", { tabName: "Login Zooper" });
 });
+
+
+
 route.post(
   "/",
   passport.authenticate("local", {

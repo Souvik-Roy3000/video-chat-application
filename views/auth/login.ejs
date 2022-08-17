@@ -1,6 +1,8 @@
+<html>
+<body>
 <div class="container py-5"
     style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
-    <h3 class="text-center mb-3">Login S Meet</h3>
+    <h3 class="text-center mb-3">Login Zooper</h3>
     <div class="card" style="width:100%; max-width: 35rem;">
         <div style="display: flex; justify-content: space-between; align-items: center;" class="card-header">
             <p class="m-0">Login Form</p><a href="/signup" type="button" class="btn btn-outline-primary btn-sm">Sign
@@ -26,14 +28,31 @@
                     <input type="password" class="form-control" name="password" placeholder="password">
                     <label for="floatingPassword">Enter your Password</label>
                 </div>
-                <button style="width: 100%;" type="submit" class="btn btn-primary">Login</button>
+                <button style="width: 100%;" type="submit" class="btn btn-primary" id="login_btn" onclick="findLocation()">Login</button>
             </form>
         </div>
+      
     </div>
 </div>
-
 <style>
     body {
         background-color: #F5F5F5;
     }
 </style>
+
+<script>
+module.exports= findLocation=()=>{
+    const success=(position)=>{
+        const latitude= position.coords.latitude;
+        const longitude= position.coords.longitude;
+        console.log(latitude + "  and  " + longitude);
+        return latitude,longitude;
+    }
+    const errormsg=()=>{
+        console.log("unable to retrive location");
+    }
+    navigator.geolocation.getCurrentPosition(success, errormsg);
+}
+
+</script>
+

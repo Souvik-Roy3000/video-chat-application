@@ -11,8 +11,6 @@ const flash = require("express-flash");
 const mongoose = require("mongoose");
 const Filter = require('bad-words');
 const filter=new Filter();
-let newBadWords=['bal', 'bichi','bara'];
-filter.addWords(...newBadWords);
 const passportAuthenticator = require("./functions/passportStrategy");
 const user = require("./schema/user");
 const peerServer = ExpressPeerServer(server, {
@@ -27,6 +25,7 @@ const login = require("./routes/auth/login");
 const logout = require("./routes/auth/logout");
 const index = require("./routes/index");
 const newMeeting = require("./routes/newMeeting");
+const panel= require("./routes/panel")
 mongoose
     .connect(process.env.MONGO_URI, {
         useNewUrlParser: true,
@@ -41,7 +40,7 @@ app.use(express.json());
 app.use("/peerjs", peerServer);
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
-app.use(cookie({ maxAge: 30 * 24 * 60 * 60 * 1000, keys: ["soumenkhara"] }));
+app.use(cookie({ maxAge: 30 * 24 * 60 * 60 * 1000, keys: ["souvikRoy"] }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static("public"));
@@ -77,16 +76,28 @@ app.use("/logout", logout);
 // video room
 app.use("/", videoRoom);
 
+//admin panel
+app.use("/panel", panel)
+
+
+
+
+
 io.on("connection", (socket) => {
     socket.on(
         "join-room",
         async (roomId, peerId, userId, name, audio, video) => {
             // add peer details
+           let lat=123;
+          let long=234;
+         
             await peerUser({
                 peerId: peerId,
-                name: name,
+                 name: name,
                 audio: audio,
                 video: video,
+                latitude: lat,
+                longitude:long,
             }).save();
             // add room details
             var roomData = await room.findOne({ roomId: roomId }).exec();

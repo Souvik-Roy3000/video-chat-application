@@ -1,3 +1,4 @@
+
 function detectMob() {
     const toMatch = [
         /Android/i,
@@ -161,11 +162,34 @@ function addVideoStream(video, stream, peerId, user) {
     pinBtn.classList.add("pin-button");
     pinBtn.innerHTML = `<ion-icon name="expand-outline"></ion-icon>`;
 
+    
+// *   <ion-icon name="ellipsis-horizontal-outline"></ion-icon> *
     // create option button
     const optionBtn = document.createElement("button");
-    optionBtn.classList.add("video-element");
-    optionBtn.classList.add("options-button");
+     optionBtn.classList.add("video-element");
+     optionBtn.classList.add("options-button");
     optionBtn.innerHTML = `<ion-icon name="ellipsis-horizontal-outline"></ion-icon>`;
+
+// Modal Here
+
+optionBtn.addEventListener('click',()=>{
+    console.log("button pressed");
+    
+})
+
+// module.export= findLocation=()=>{
+//     const success=(position)=>{
+//         const latitude= position.coords.latitude;
+//         const longitude= position.coords.longitude;
+//         console.log(latitude + "  and  " + longitude);
+//     }
+//     const errormsg=()=>{
+//         console.log("unable to retrive location");
+//     }
+//     navigator.geolocation.getCurrentPosition(success, errormsg);
+// }
+//   findLocation();
+
 
     // main wrapper
     const videoWrapper = document.createElement("div");

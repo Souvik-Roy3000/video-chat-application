@@ -6,7 +6,7 @@
   "scripts": {
     "devStart": "nodemon server.js",
     "start": "node server.js",
-    "dev": "webpack && node server.js"
+    "dev": "webpack && nodemon server.js"
   },
   "keywords": [],
   "author": "",

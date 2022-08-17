@@ -4,7 +4,7 @@ const { notAuthorize } = require("../../functions/authFunc");
 const user = require("../../schema/user");
 
 route.get("/", notAuthorize, (req, res) => {
-  res.render("auth/signup.ejs", { tabName: "Register S-Meet" });
+  res.render("auth/signup.ejs", { tabName: "Register Zooper" });
 });
 
 route.post("/", notAuthorize, (req, res) => {

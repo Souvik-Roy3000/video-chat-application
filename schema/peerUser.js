@@ -16,6 +16,14 @@ const peerUser = mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  latitude: {
+    type: String,
+    required: true,
+  },
+  longitude: {
+    type: String,
+    required: true,
+  }
 });
 
 module.exports = new mongoose.model("peerUser", peerUser);
